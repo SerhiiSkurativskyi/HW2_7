@@ -11,12 +11,17 @@ public class FileNavigator {
 
     public void add(FileData file) {
         List<FileData> unitedFiles;
+        String path = file.path();
         if (!filesMap.containsKey(file.path())) {
             filesMap.put(file.path(), Collections.singletonList(file));
         } else {
             unitedFiles = new ArrayList<>(filesMap.get(file.path()));
             unitedFiles.add(file);
             filesMap.put(file.path(), unitedFiles);
+        }
+        if (!path.equals(filesMap.get(path).get(0).path())) {
+            throw new InconsistentPathException("Cannot add file with path " + path +
+                    " to directory " + filesMap.get(path).get(0).path());
         }
     }
 
