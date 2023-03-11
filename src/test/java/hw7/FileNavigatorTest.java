@@ -17,13 +17,12 @@ public class FileNavigatorTest {
         navigatorTest.add(testFile1);
         navigatorTest.add(testFile2);
         navigatorTest.add(testFile3);
-        List<FileData> pathThird = List.of(testFile1,testFile2);
+        List<FileData> pathThird = List.of(testFile1, testFile2);
         List<FileData> pathFourth = List.of(testFile3);
         assertArrayEquals(pathThird.toArray(), navigatorTest.getFilesMap().get("c/first/second/third").toArray());
         assertArrayEquals(pathFourth.toArray(), navigatorTest.getFilesMap().get("c/first/second/third/fourth").toArray());
     }
 
-    /*Метод повертає список файлів, пов'язаних з шляхом переданим як параметр.*/
     @Test
     public void findTest() {
         FileData testFile1 = new FileData("Test name1.jpg", 23, "c/first/second/third");
@@ -31,12 +30,10 @@ public class FileNavigatorTest {
         FileNavigator navigatorTest = new FileNavigator();
         navigatorTest.add(testFile1);
         navigatorTest.add(testFile2);
-        List<FileData> pathThird = List.of(testFile1,testFile2);
+        List<FileData> pathThird = List.of(testFile1, testFile2);
         assertArrayEquals(pathThird.toArray(), navigatorTest.find("c/first/second/third").toArray());
     }
 
-    /*Метод повертає список файлів, розмір (в байтах) яких не перевищує значення,
-    передане як параметр.*/
     @Test
     public void filterBySizeTest() {
         FileData testFile1 = new FileData("Test name1.jpg", 23, "c/first/second/third");
@@ -60,8 +57,6 @@ public class FileNavigatorTest {
         assertTrue(navigatorTest.filterBySize(80).contains(testFile6));
     }
 
-    /*Метод видаляє шлях і пов'язані з ним файли, виходячи з значення шляху,
-    переданого як параметр.*/
     @Test
     public void removeTest() {
         FileData testFile1 = new FileData("Test name1.jpg", 23, "c/first/second/third");
@@ -83,8 +78,6 @@ public class FileNavigatorTest {
         assertFalse(navigatorTest.getFilesMap().containsKey("c/first/second/third/fourth/sixth"));
     }
 
-    /*Метод сортує всі наявні файли за розміром (за зростанням),
-    потім повертає список відсортованих файлів.*/
     @Test
     public void sortBySizeTest() {
         FileData testFile1 = new FileData("Test name1.jpg", 23, "c/first/second/third");
@@ -102,15 +95,10 @@ public class FileNavigatorTest {
         navigatorTest.add(testFile6);
         navigatorTest.sortBySize();
         assertEquals(4, navigatorTest.sortBySize().get(0).fileSize());
-        assertEquals(13,navigatorTest.sortBySize().get(1).fileSize());
-        assertEquals(23,navigatorTest.sortBySize().get(2).fileSize());
-        assertEquals(43,navigatorTest.sortBySize().get(3).fileSize());
-        assertEquals(83,navigatorTest.sortBySize().get(4).fileSize());
-        assertEquals(163,navigatorTest.sortBySize().get(5).fileSize());
-    }
-
-    @Test
-    public void getAllTest() {
-
+        assertEquals(13, navigatorTest.sortBySize().get(1).fileSize());
+        assertEquals(23, navigatorTest.sortBySize().get(2).fileSize());
+        assertEquals(43, navigatorTest.sortBySize().get(3).fileSize());
+        assertEquals(83, navigatorTest.sortBySize().get(4).fileSize());
+        assertEquals(163, navigatorTest.sortBySize().get(5).fileSize());
     }
 }
